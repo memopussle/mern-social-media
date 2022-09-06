@@ -2,10 +2,11 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
-
+import dotenv from "dotenv";
 import postRoutes from "./routes/posts.js";
 
 const app = express();
+dotenv.config();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
@@ -14,8 +15,7 @@ app.use(cors());
 app.use("/posts", postRoutes); //every routes in postRoutes is going to start with /posts
 
 // host data on mongo atlas
-const CONNECTION_URL =
- 'mongodb+srv://xanhtham:gianganhthu7b..@cluster0.tupwf3g.mongodb.net/?retryWrites=true&w=majority'
+const CONNECTION_URL = process.env.CONNECTION_URL;
 const PORT = process.env.port || 5000;
 
 mongoose
